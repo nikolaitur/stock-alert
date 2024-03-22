@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "d478cd95763b3e1163f784f2c18add63"
+name = "scalable-consumer-app"
+handle = "scalable-consumer-app"
+application_url = "https://classified-malta-desirable-conclude.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "gadget-app-test220.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://classified-malta-desirable-conclude.trycloudflare.com/auth/callback",
+  "https://classified-malta-desirable-conclude.trycloudflare.com/auth/shopify/callback",
+  "https://classified-malta-desirable-conclude.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false
