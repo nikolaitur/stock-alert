@@ -2,6 +2,7 @@
 
 use App\Exceptions\ShopifyProductCreatorException;
 use App\Lib\AuthRedirection;
+use App\Lib\CustomerCreator;
 use App\Lib\EnsureBilling;
 use App\Lib\ProductCreator;
 use App\Models\Session;
@@ -34,7 +35,7 @@ use Shopify\Webhooks\Topics;
 */
 
 Route::fallback(function (Request $request) {
-    if (Context::$IS_EMBEDDED_APP &&  $request->query("embedded", false) === "1") {
+    if (Context::$IS_EMBEDDED_APP && $request->query("embedded", false) === "1") {
         if (env('APP_ENV') === 'production') {
             return file_get_contents(public_path('index.html'));
         } else {
@@ -70,13 +71,13 @@ Route::get('/api/auth/callback', function (Request $request) {
     } else {
         Log::error(
             "Failed to register APP_UNINSTALLED webhook for shop $shop with response body: " .
-                print_r($response->getBody(), true)
+            print_r($response->getBody(), true)
         );
     }
 
     $redirectUrl = Utils::getEmbeddedAppUrl($host);
     if (Config::get('shopify.billing.required')) {
-        list($hasPayment, $confirmationUrl) = EnsureBilling::check($session, Config::get('shopify.billing'));
+        list ($hasPayment, $confirmationUrl) = EnsureBilling::check($session, Config::get('shopify.billing'));
 
         if (!$hasPayment) {
             $redirectUrl = $confirmationUrl;
@@ -95,6 +96,39 @@ Route::get('/api/products/count', function (Request $request) {
 
     return response($result->getDecodedBody());
 })->middleware('shopify.auth');
+
+// Route::post('/api/customer', function (Request $request) {
+//     dd($request);
+//     $session = $request->get('shopifySession'); // Provided by the shopify.auth middleware, guaranteed to be active
+//     $success = $code = $error = null;
+//     $variantId = $request->get('variant_id');
+//     $productId = $request->get('product_id');
+//     $email = $request->get('email');
+//     return response()->json(["success" => true]);
+//     try {
+//         CustomerCreator::call($session, $email, $variantId, $productId);
+//         $success = true;
+//         $code = 200;
+//         $error = null;
+//     } catch (\Exception $e) {
+//         $success = false;
+
+//         if ($e instanceof ShopifyProductCreatorException) {
+//             $code = $e->response->getStatusCode();
+//             $error = $e->response->getDecodedBody();
+//             if (array_key_exists("errors", $error)) {
+//                 $error = $error["errors"];
+//             }
+//         } else {
+//             $code = 500;
+//             $error = $e->getMessage();
+//         }
+
+//         Log::error("Failed to create customer: $error");
+//     } finally {
+//         return response()->json(["success" => $success, "error" => $error], $code);
+//     }
+// })->middleware('shopify.auth');
 
 Route::get('/api/products/create', function (Request $request) {
     /** @var AuthSession */

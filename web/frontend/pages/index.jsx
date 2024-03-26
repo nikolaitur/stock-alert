@@ -19,7 +19,10 @@ export default function HomePage() {
   const { t } = useTranslation();
   return (
     <Page narrowWidth>
-      <TitleBar title={t("HomePage.title")} primaryAction={null} />
+      {/* <TitleBar title={t("HomePage.title")} primaryAction={null} /> */}
+      <Text variant="heading2xl" as="h3">
+        Stock Alerts
+      </Text>
       <Layout>
         <Layout.Section>
           <Card sectioned>

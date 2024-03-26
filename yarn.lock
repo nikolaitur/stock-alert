@@ -1092,6 +1092,11 @@
   resolved "https://registry.npmjs.org/@shopify/polaris-icons/-/polaris-icons-8.8.0.tgz"
   integrity sha512-B4kym/sWAif0pSClysCeOMxfKBPhCZaAdoR+7J50SAoI6gg47jBAUS+PRexj+gXAmxLOystcCCibwyL1QZDW+A==
 
+"@shopify/polaris-icons@^8.8.0":
+  version "8.8.0"
+  resolved "https://registry.npmjs.org/@shopify/polaris-icons/-/polaris-icons-8.8.0.tgz"
+  integrity sha512-B4kym/sWAif0pSClysCeOMxfKBPhCZaAdoR+7J50SAoI6gg47jBAUS+PRexj+gXAmxLOystcCCibwyL1QZDW+A==
+
 "@shopify/polaris-icons@8.0.0":
   version "8.0.0"
   resolved "https://registry.npmjs.org/@shopify/polaris-icons/-/polaris-icons-8.0.0.tgz"
@@ -1109,6 +1114,13 @@
   dependencies:
     deepmerge "^4.3.1"
 
+"@shopify/polaris-tokens@^8.8.0":
+  version "8.8.0"
+  resolved "https://registry.npmjs.org/@shopify/polaris-tokens/-/polaris-tokens-8.8.0.tgz"
+  integrity sha512-Ml0sR+hu/uZJVDZjF2+2qgogCrXSvQ8TOwkrRNUuzhDG58f99FHnyuQ1kprUFyDt0DSEZJ0Jf4pzrBnkI0UgVg==
+  dependencies:
+    deepmerge "^4.3.1"
+
 "@shopify/polaris@^10.49.1":
   version "10.50.1"
   resolved "https://registry.npmjs.org/@shopify/polaris/-/polaris-10.50.1.tgz"
@@ -1116,6 +1128,19 @@
   dependencies:
     "@shopify/polaris-icons" "^6.16.0"
     "@shopify/polaris-tokens" "^6.14.0"
+    "@types/react" "*"
+    "@types/react-dom" "*"
+    "@types/react-transition-group" "^4.4.2"
+    react-fast-compare "^3.2.0"
+    react-transition-group "^4.4.2"
+
+"@shopify/polaris@^12.22.1":
+  version "12.22.1"
+  resolved "https://registry.npmjs.org/@shopify/polaris/-/polaris-12.22.1.tgz"
+  integrity sha512-eZgVGqdiyg0p3rgLCf/YiEy9yNZwhnH15pmdi+IhHo9I/n89j73N0Jdm0qiimFBBXjPpNuxuQ6ZX+Zji7MJysw==
+  dependencies:
+    "@shopify/polaris-icons" "^8.8.0"
+    "@shopify/polaris-tokens" "^8.8.0"
     "@types/react" "*"
     "@types/react-dom" "*"
     "@types/react-transition-group" "^4.4.2"
@@ -5536,7 +5561,7 @@ rc@1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-dom@^16.14.0 || ^17.0.0 || ^18.0.0", react-dom@^17.0.2, react-dom@>=16.8:
+"react-dom@^16.14.0 || ^17.0.0 || ^18.0.0", react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -5545,7 +5570,7 @@ rc@1.2.8:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-dom@^18.0.0, react-dom@>=16.6.0, react-dom@18.2.0:
+react-dom@^18.0.0, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -5618,14 +5643,14 @@ react-transition-group@^4.4.2:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.14.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 16.8.0", react@>=16.6.0, react@>=16.8, react@>=18.0.0, react@17.0.2, react@18.2.0:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 16.8.0", react@>=16.6.0, react@>=16.8, react@>=18.0.0, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
 
-react@^17.0.2:
+"react@^16.14.0 || ^17.0.0 || ^18.0.0", react@^17.0.2, react@17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==

@@ -34,7 +34,45 @@ class DbSessionStorage implements SessionStorage
             }
             if ($dbSession->user_id) {
                 $onlineAccessInfo = new AccessTokenOnlineUserInfo(
-                    (int)$dbSession->user_id,
+                    (int) $dbSession->user_id,
+                    $dbSession->user_first_name,
+                    $dbSession->user_last_name,
+                    $dbSession->user_email,
+                    $dbSession->user_email_verified == 1,
+                    $dbSession->account_owner == 1,
+                    $dbSession->locale,
+                    $dbSession->collaborator == 1
+                );
+                $session->setOnlineAccessInfo($onlineAccessInfo);
+            }
+            return $session;
+        }
+        return null;
+    }
+
+    public function findSessionByShop(string $shop): ?Session
+    {
+        $dbSession = \App\Models\Session::where('shop', $shop)->first();
+
+        if ($dbSession) {
+            $session = new Session(
+                $dbSession->session_id,
+                $dbSession->shop,
+                $dbSession->is_online == 1,
+                $dbSession->state
+            );
+            if ($dbSession->expires_at) {
+                $session->setExpires($dbSession->expires_at);
+            }
+            if ($dbSession->access_token) {
+                $session->setAccessToken($dbSession->access_token);
+            }
+            if ($dbSession->scope) {
+                $session->setScope($dbSession->scope);
+            }
+            if ($dbSession->user_id) {
+                $onlineAccessInfo = new AccessTokenOnlineUserInfo(
+                    (int) $dbSession->user_id,
                     $dbSession->user_first_name,
                     $dbSession->user_last_name,
                     $dbSession->user_email,
@@ -63,7 +101,7 @@ class DbSessionStorage implements SessionStorage
         $dbSession->access_token = $session->getAccessToken();
         $dbSession->expires_at = $session->getExpires();
         $dbSession->scope = $session->getScope();
-        if (!empty($session->getOnlineAccessInfo())) {
+        if (!empty ($session->getOnlineAccessInfo())) {
             $dbSession->user_id = $session->getOnlineAccessInfo()->getId();
             $dbSession->user_first_name = $session->getOnlineAccessInfo()->getFirstName();
             $dbSession->user_last_name = $session->getOnlineAccessInfo()->getLastName();

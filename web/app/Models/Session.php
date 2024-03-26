@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Session extends Model
 {
     use HasFactory;
+
+    public static function findTokenByShop(string $shop)
+    {
+        return Session::where("shop", $shop)->first()->sessionId;
+    }
 }
