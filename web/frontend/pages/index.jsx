@@ -44,7 +44,9 @@ export default function HomePage() {
   useEffect(() => {
     (async() => {
       const response = await fetch("/api/subscriptions/7"); // /api/subscriptions/:product_id
+      await fetch('/api/app/enable'); // set app enable
 
+      const res = await fetch('/api/app/status');
     })()
   }, [])
 

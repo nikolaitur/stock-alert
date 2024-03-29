@@ -135,6 +135,66 @@ Route::get('/api/alerts', function (Request $request) {
 })->middleware('shopify.auth');
 
 
+Route::get('/api/subscriptions/{product_id}', function (int $product_id, Request $request) {
+
+    $session = $request->get('shopifySession'); // Provided by the shopify.auth middleware, guaranteed to be active
+    // first get all alerts records
+    $alert = \App\Models\StockAlert::where('id', $product_id)
+        ->selectRaw('*, count(customer_id) as subscriptions')
+        ->groupBy(['product_id', 'variant_id'])
+        ->first();
+
+    $productMetafields = array ();
+    $metafields = Metafield::all($session, [], ["metafield" => ["owner_id" => $alert->product_id, "owner_resource" => "product"]]);
+    foreach ($metafields as $metafield) {
+        if ($metafield->key == "stock_alert_settings") {
+            $productMetafields[$alert->product_id] = $metafield->value;
+        }
+    }
+
+    // Make response with alert data with customers data
+    $product = Product::find($session, $alert->product_id, []);
+    $variant = Variant::find($session, $alert->variant_id, []);
+    $alert->product_title = $product->title;
+    $alert->variant_title = $variant->title;
+    $alert->stockLevel = $productMetafields[$alert->product_id] ?? 0;
+
+    $emails = \App\Models\StockAlert::where("product_id", $alert->product_id)->get();
+    $customers = array ();
+    foreach ($emails as &$email) {
+        array_push($customers, $email->customers);
+    }
+    return response()->json(['alert' => $alert, 'customers' => $customers]);
+
+})->middleware('shopify.auth');
+
+Route::get('/api/app/enable', function (Request $request) {
+    $session = $request->get('shopifySession');
+    $shop = $session->getShop();
+
+    $appInfo = \App\Models\AppInfo::where('shop', $shop)->first();
+    if (!isset ($appInfo)) {
+        $appInfo = new \App\Models\AppInfo();
+        $appInfo->shop = $shop;
+        $appInfo->is_enable = true;
+        $appInfo->save();
+    } else {
+        $appInfo->is_enable = !$appInfo->is_enable;
+        $appInfo->save();
+    }
+
+    return response()->json(['msg' => 'ok']);
+})->middleware('shopify.auth');
+
+Route::get('/api/app/status', function (Request $request) {
+    $session = $request->get('shopifySession');
+    $shop = $session->getShop();
+
+    $appInfo = \App\Models\AppInfo::where('shop', $shop)->first();
+    
+    return response()->json($appInfo);
+})->middleware('shopify.auth');
+
 Route::get('/api/products/create', function (Request $request) {
     /** @var AuthSession */
     $session = $request->get('shopifySession'); // Provided by the shopify.auth middleware, guaranteed to be active

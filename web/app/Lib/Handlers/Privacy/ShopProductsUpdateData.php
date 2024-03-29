@@ -33,6 +33,11 @@ class ShopProductsUpdateData implements Handler
         //     []
         // );
         // Find product to get Variants and quantity
+        $appInfo = \App\Models\AppInfo::where('shop', $shop)->first();
+        if (!$appInfo->is_enable) {
+            return;
+        }
+        
         try {
             $products = Product::find(
                 $session,
@@ -76,9 +81,9 @@ class ShopProductsUpdateData implements Handler
                     // will trigger with not send alerts and current quantity is bigger than stock_alert_settings
                     if ($variant->inventory_quantity > $stockAlertSettings && !$alert->send_status) {
                         // the condition is good, so will email with trigger flow
-                        SendEmail::call($alert->customers->shopify_customer_id, $shop, $productId."", $variant->title);
+                        SendEmail::call($alert->customers->shopify_customer_id, $shop, $productId . "", $variant->title);
                         $alert->send_status = true;
-                        $alert->save(); 
+                        $alert->save();
                     }
                 }
             }
