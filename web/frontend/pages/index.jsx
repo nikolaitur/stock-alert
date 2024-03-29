@@ -4,20 +4,20 @@ import {
   Layout,
   TextContainer,
   Image,
-  Stack,
   Link,
   Text,
   Badge,
   Button,
   ButtonGroup,
+  IndexTable,
+  BlockStack,
+  InlineStack,
   DataTable,
+  Box
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useTranslation, Trans } from "react-i18next";
-
-import { trophyImage } from "../assets";
-
-import { ProductsCard } from "../components";
+import { SubscriptionTable } from "../components";
 import { useAuthenticatedFetch, useAppQuery } from "../hooks";
 import { useEffect, useMemo } from "react";
 
@@ -39,149 +39,83 @@ export default function HomePage() {
       },
     },
   });
-  
-  // get subscriptions example
-  useEffect(() => {
-    (async() => {
-      const response = await fetch("/api/subscriptions/7"); // /api/subscriptions/:product_id
-      await fetch('/api/app/enable'); // set app enable
-
-      const res = await fetch('/api/app/status');
-    })()
-  }, [])
-
-  const dataTableHeadings = ['   ', 'Product', 'Variant', 'Stock level', 'Subscriptions'];
-  const columnDataTypes = ['text', 'text', 'numeric', 'numeric'];
-  // for (let i = 0; i < 10; i++) {
-  //   let random = Math.round(Math.random() * 10000);
-  //   rows.push([`Product title ${i}`, `Variant title ${i}`, i.toString(), <Link url=" ">{random}</Link>]);
-  // }
   const rows = useMemo(() => {
     if (!isLoading && Array.isArray(data)) {
-      return data.map((item) => ([
-        item.product_title,
-        item.variant_title,
-        item.stockLevel,
-        <Link url={"/subscription/" + item.id}>{item.subscriptions}</Link>
-      ]))
+      return data;
     }
     return []
   }, [data, isLoading])
 
   return (
     <Page narrowWidth>
-      <Layout.Section>
-        <Card sectioned>
-          <Stack
-            wrap={false}
-            spacing="extraTight"
-            distribution="trailing"
-            alignment="center"
-          >
-            <Stack.Item fill>
-              <ButtonGroup>
-                <Text as="h2" variant="headingMd">
-                  Stock Alerts
-                </Text>
-                <Badge status="success" size="medium">Enable</Badge>
-              </ButtonGroup>
-            </Stack.Item>
-            <Stack.Item>
-              <Button size="micro">Disable</Button>
-            </Stack.Item>
-          </Stack>
-          <Text color="subdued">Disabling Stock Alert will disbble the option for user to opt-in to stock-alerts.</Text>
-        </Card>
-        <Card sectioned>
-          <Text variant="headingMd" as='h2'>Add to Shopify theme editor</Text>
-          <Text color="subdued">The app is currently enabled, so you can add it to your Shopify theme editor.</Text>
-          <Button>Add to theme</Button>
-        </Card>
-      </Layout.Section>
-      <Layout.Section>
-        <Stack >
-          <Stack.Item fill>
-            <Text variant="headingXl">Recent subscriptions</Text>
-          </Stack.Item>
-          <Stack.Item><Button>Show All</Button></Stack.Item>
-        </Stack>
-      </Layout.Section>
-      <Layout.Section>
-        <DataTable
-          columnContentTypes={['text', 'text', 'numeric', 'numeric']}
-          headings={['Product', 'Variant', 'Stock level', 'Subscriptions']}
-          rows={rows}
-        />
-      </Layout.Section>
-      {/* <TitleBar title={t("HomePage.title")} primaryAction={null} />
-      <Layout>
         <Layout.Section>
-          <Card sectioned>
-            <Stack
-              wrap={false}
-              spacing="extraTight"
-              distribution="trailing"
-              alignment="center"
-            >
-              <Stack.Item fill>
-                <TextContainer spacing="loose">
-                  <Text as="h2" variant="headingMd">
-                    {t("HomePage.heading")}
-                  </Text>
-                  <p>
-                    <Trans
-                      i18nKey="HomePage.yourAppIsReadyToExplore"
-                      components={{
-                        PolarisLink: (
-                          <Link url="https://polaris.shopify.com/" external />
-                        ),
-                        AdminApiLink: (
-                          <Link
-                            url="https://shopify.dev/api/admin-graphql"
-                            external
-                          />
-                        ),
-                        AppBridgeLink: (
-                          <Link
-                            url="https://shopify.dev/apps/tools/app-bridge"
-                            external
-                          />
-                        ),
-                      }}
-                    />
-                  </p>
-                  <p>{t("HomePage.startPopulatingYourApp")}</p>
-                  <p>
-                    <Trans
-                      i18nKey="HomePage.learnMore"
-                      components={{
-                        ShopifyTutorialLink: (
-                          <Link
-                            url="https://shopify.dev/apps/getting-started/add-functionality"
-                            external
-                          />
-                        ),
-                      }}
-                    />
-                  </p>
-                </TextContainer>
-              </Stack.Item>
-              <Stack.Item>
-                <div style={{ padding: "0 20px" }}>
-                  <Image
-                    source={trophyImage}
-                    alt={t("HomePage.trophyAltText")}
-                    width={120}
-                  />
-                </div>
-              </Stack.Item>
-            </Stack>
-          </Card>
+            <BlockStack gap={600}>
+                <BlockStack gap={400}>
+                    <Text as="h1" variant="headingLg">
+                        Stock Alerts
+                    </Text>
+                    <Card sectioned>
+                        <BlockStack gap={100}>
+                            <InlineStack align="space-between">
+                                <InlineStack gap={400} blockAlign="center">
+                                    <Text as="h2" variant="headingMd">
+                                        Stock Alerts
+                                    </Text>
+                                    <Badge tone="success" size="medium">
+                                        <Text variant="headingXs">
+                                            Enable
+                                        </Text>
+                                    </Badge>
+                                </InlineStack>
+                                <Button size="medium">
+                                    <Text variant="headingXs">Disable</Text>
+                                </Button>
+                            </InlineStack>
+                            <Text color="subdued">
+                                Disabling Stock Alert will disbble the
+                                option for user to opt-in to stock-alerts.
+                            </Text>
+                        </BlockStack>
+                    </Card>
+                    <Card sectioned>
+                        <BlockStack gap={150}>
+                            <Text variant="headingMd" as="h2">
+                                Add to Shopify theme editor
+                            </Text>
+                            <BlockStack gap={100}>
+                                <Text color="subdued">
+                                    The app is currently enabled, so you can
+                                    add it to your Shopify theme editor.
+                                </Text>
+                                <InlineStack>
+                                    <Button
+                                        variant="primary"
+                                        fullWidth={false}
+                                    >
+                                        Add to theme
+                                    </Button>
+                                </InlineStack>
+                            </BlockStack>
+                        </BlockStack>
+                    </Card>
+                </BlockStack>
+                <BlockStack gap={400}>
+                    <InlineStack align="space-between">
+                        <Text variant="headingLg">
+                            Recent subscriptions
+                        </Text>
+                        <Link url="/subscriptions">
+                          <Button>
+                            <Box minWidth="64px" maxWidth="64px">
+                              <Text variant="headingXs">Show all</Text>
+                            </Box>
+                          </Button>
+                        </Link>
+                    </InlineStack>
+                    <SubscriptionTable rows={rows} selectable={false}/>
+                </BlockStack>
+            </BlockStack>
         </Layout.Section>
-        <Layout.Section>
-          <ProductsCard />
-        </Layout.Section>
-      </Layout> */}
     </Page>
   );
 }

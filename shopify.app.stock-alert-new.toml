@@ -3,7 +3,7 @@
 client_id = "5b472b119e2c0bab4004ca596ef64b7b"
 name = "stock-alert-new"
 handle = "stock-alert-new"
-application_url = "https://transcription-titanium-postage-trust.trycloudflare.com"
+application_url = "https://salary-truly-distances-ingredients.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_customers,write_customers,write_products"
 
 [auth]
 redirect_urls = [
-  "https://transcription-titanium-postage-trust.trycloudflare.com/auth/callback",
-  "https://transcription-titanium-postage-trust.trycloudflare.com/auth/shopify/callback",
-  "https://transcription-titanium-postage-trust.trycloudflare.com/api/auth/callback"
+  "https://salary-truly-distances-ingredients.trycloudflare.com/auth/callback",
+  "https://salary-truly-distances-ingredients.trycloudflare.com/auth/shopify/callback",
+  "https://salary-truly-distances-ingredients.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

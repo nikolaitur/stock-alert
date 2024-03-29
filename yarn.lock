@@ -1087,10 +1087,10 @@
   resolved "https://registry.npmjs.org/@shopify/polaris-icons/-/polaris-icons-8.8.0.tgz"
   integrity sha512-B4kym/sWAif0pSClysCeOMxfKBPhCZaAdoR+7J50SAoI6gg47jBAUS+PRexj+gXAmxLOystcCCibwyL1QZDW+A==
 
-"@shopify/polaris-icons@^8.8.0":
-  version "8.8.0"
-  resolved "https://registry.npmjs.org/@shopify/polaris-icons/-/polaris-icons-8.8.0.tgz"
-  integrity sha512-B4kym/sWAif0pSClysCeOMxfKBPhCZaAdoR+7J50SAoI6gg47jBAUS+PRexj+gXAmxLOystcCCibwyL1QZDW+A==
+"@shopify/polaris-icons@^8.9.0":
+  version "8.9.0"
+  resolved "https://registry.npmjs.org/@shopify/polaris-icons/-/polaris-icons-8.9.0.tgz"
+  integrity sha512-3qtqr3kmK2ScjdlnwMiSzvN5oLRRSmMgB0Ys5u2EnWj/TE4DO2nPkHBiZtFImg7wt4ju7qYYIf5cU9qYo37tuQ==
 
 "@shopify/polaris-icons@8.0.0":
   version "8.0.0"
@@ -1109,33 +1109,20 @@
   dependencies:
     deepmerge "^4.3.1"
 
-"@shopify/polaris-tokens@^8.8.0":
-  version "8.8.0"
-  resolved "https://registry.npmjs.org/@shopify/polaris-tokens/-/polaris-tokens-8.8.0.tgz"
-  integrity sha512-Ml0sR+hu/uZJVDZjF2+2qgogCrXSvQ8TOwkrRNUuzhDG58f99FHnyuQ1kprUFyDt0DSEZJ0Jf4pzrBnkI0UgVg==
+"@shopify/polaris-tokens@^8.9.0":
+  version "8.9.0"
+  resolved "https://registry.npmjs.org/@shopify/polaris-tokens/-/polaris-tokens-8.9.0.tgz"
+  integrity sha512-ilhVAe7AYVg7TJ5MbvI+jLzynpoKJHbYzlE5kaUrecRVliOximdgqc3/GdBKiFt2dAVgOcjG8C/T7c48d5dR2w==
   dependencies:
     deepmerge "^4.3.1"
 
-"@shopify/polaris@^12.22.1":
-  version "12.22.1"
-  resolved "https://registry.npmjs.org/@shopify/polaris/-/polaris-12.22.1.tgz"
-  integrity sha512-eZgVGqdiyg0p3rgLCf/YiEy9yNZwhnH15pmdi+IhHo9I/n89j73N0Jdm0qiimFBBXjPpNuxuQ6ZX+Zji7MJysw==
+"@shopify/polaris@^12.0.1", "@shopify/polaris@^12.22.1":
+  version "12.23.0"
+  resolved "https://registry.npmjs.org/@shopify/polaris/-/polaris-12.23.0.tgz"
+  integrity sha512-dz2zru9zNqshyWr/UahaKxM12QeTZvfJy3i2ef1TN153RLn0Mwzo7/UnYb2FbF3a18zIkEC7A4K2AAIB1FWH8Q==
   dependencies:
-    "@shopify/polaris-icons" "^8.8.0"
-    "@shopify/polaris-tokens" "^8.8.0"
-    "@types/react" "*"
-    "@types/react-dom" "*"
-    "@types/react-transition-group" "^4.4.2"
-    react-fast-compare "^3.2.0"
-    react-transition-group "^4.4.2"
-
-"@shopify/polaris@^12.22.1":
-  version "12.22.1"
-  resolved "https://registry.npmjs.org/@shopify/polaris/-/polaris-12.22.1.tgz"
-  integrity sha512-eZgVGqdiyg0p3rgLCf/YiEy9yNZwhnH15pmdi+IhHo9I/n89j73N0Jdm0qiimFBBXjPpNuxuQ6ZX+Zji7MJysw==
-  dependencies:
-    "@shopify/polaris-icons" "^8.8.0"
-    "@shopify/polaris-tokens" "^8.8.0"
+    "@shopify/polaris-icons" "^8.9.0"
+    "@shopify/polaris-tokens" "^8.9.0"
     "@types/react" "*"
     "@types/react-dom" "*"
     "@types/react-transition-group" "^4.4.2"
@@ -5556,16 +5543,7 @@ rc@1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^17.0.2:
-  version "17.0.2"
-  resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
-  integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    scheduler "^0.20.2"
-
-react-dom@^18.0.0, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@18.2.0:
+react-dom@^18.0.0, react-dom@^18.0.2, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -5638,20 +5616,12 @@ react-transition-group@^4.4.2:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 16.8.0", react@>=16.6.0, react@>=16.8, react@>=18.0.0, react@18.2.0:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.0.2, react@^18.2.0, "react@>= 16.8.0", react@>=16.6.0, react@>=16.8, react@>=18.0.0, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
-
-react@^17.0.2, react@17.0.2:
-  version "17.0.2"
-  resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
-  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 read-cmd-shim@^4.0.0:
   version "4.0.0"
@@ -5907,14 +5877,6 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.20.2:
-  version "0.20.2"
-  resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.20.2.tgz"
-  integrity sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-
 scheduler@^0.23.0:
   version "0.23.0"
   resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.23.0.tgz"
@@ -6044,7 +6006,7 @@ shelljs@^0.8.5:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-"shopify-frontend-template-react@file:D:\\Mykola\\Stock-Alert-App\\web\\frontend":
+"shopify-frontend-template-react@file:D:\\robin\\scalable-consumer-app\\web\\frontend":
   version "1.0.0"
   resolved "file:web/frontend"
   dependencies:
@@ -6054,7 +6016,7 @@ shelljs@^0.8.5:
     "@shopify/app-bridge" "^3.7.7"
     "@shopify/app-bridge-react" "^3.7.7"
     "@shopify/i18next-shopify" "^0.2.9"
-    "@shopify/polaris" "^12.0.1"
+    "@shopify/polaris" "^10.22.1"
     "@vitejs/plugin-react" "1.2.0"
     i18next "^23.1.0"
     i18next-resources-to-backend "^1.1.4"

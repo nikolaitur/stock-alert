@@ -117,6 +117,7 @@ Route::get('/api/alerts', function (Request $request) {
             $alert->product_title = $product->title;
             $alert->variant_title = $variant->title;
             $alert->stockLevel = $variant->inventory_quantity;
+            $alert->featuredImage = $product->images[0]->src;
             // $alert->product_title = $alert->product_id;
             // $alert->variant_title = 'Variant Title';
             array_push($response, $alert);
@@ -136,20 +137,15 @@ Route::get('/api/subscriptions/{product_id}', function (int $product_id, Request
         ->groupBy(['product_id', 'variant_id'])
         ->first();
 
-    $productMetafields = array ();
-    $metafields = Metafield::all($session, [], ["metafield" => ["owner_id" => $alert->product_id, "owner_resource" => "product"]]);
-    foreach ($metafields as $metafield) {
-        if ($metafield->key == "stock_alert_settings") {
-            $productMetafields[$alert->product_id] = $metafield->value;
-        }
-    }
+    
 
     // Make response with alert data with customers data
     $product = Product::find($session, $alert->product_id, []);
     $variant = Variant::find($session, $alert->variant_id, []);
     $alert->product_title = $product->title;
     $alert->variant_title = $variant->title;
-    $alert->stockLevel = $productMetafields[$alert->product_id] ?? 0;
+    $alert->stockLevel = $variant->inventory_quantity;
+    $alert->featuredImage = $product->images[0]->src;
 
     $emails = \App\Models\StockAlert::where("product_id", $alert->product_id)->get();
     $customers = array ();
