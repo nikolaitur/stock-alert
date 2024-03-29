@@ -57,7 +57,7 @@ export default function HomePage() {
   //   rows.push([`Product title ${i}`, `Variant title ${i}`, i.toString(), <Link url=" ">{random}</Link>]);
   // }
   const rows = useMemo(() => {
-    if (!isLoading) {
+    if (!isLoading && Array.isArray(data)) {
       return data.map((item) => ([
         item.product_title,
         item.variant_title,

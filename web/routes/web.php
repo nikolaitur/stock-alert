@@ -108,29 +108,21 @@ Route::get('/api/alerts', function (Request $request) {
         ->selectRaw('*, count(customer_id) as subscriptions')
         ->groupBy(['product_id', 'variant_id'])
         ->get();
-    $products = \App\Models\StockAlert::where('send_status', false)
-        ->groupBy('product_id')
-        ->get();
 
-    $productMetafields = array ();
-    foreach ($products as $product) {
-        $metafields = Metafield::all($session, [], ["metafield" => ["owner_id" => $product->product_id, "owner_resource" => "product"]]);
-        foreach ($metafields as $metafield) {
-            if ($metafield->key == "stock_alert_settings") {
-                $productMetafields[$product->product_id] = $metafield->value;
-            }
+    $response = [];
+    foreach ($alerts as &$alert) {
+        if ($alert->customers->shop == $session->getShop()) {
+            $product = Product::find($session, $alert->product_id, []);
+            $variant = Variant::find($session, $alert->variant_id, []);
+            $alert->product_title = $product->title;
+            $alert->variant_title = $variant->title;
+            $alert->stockLevel = $variant->inventory_quantity;
+            // $alert->product_title = $alert->product_id;
+            // $alert->variant_title = 'Variant Title';
+            array_push($response, $alert);
         }
     }
-
-    // $response = [];
-    foreach ($alerts as &$alert) {
-        $product = Product::find($session, $alert->product_id, []);
-        $variant = Variant::find($session, $alert->variant_id, []);
-        $alert->product_title = $product->title;
-        $alert->variant_title = $variant->title;
-        $alert->stockLevel = $productMetafields[$alert->product_id] ?? 0;
-    }
-    return response()->json($alerts);
+    return response()->json($response);
 
 })->middleware('shopify.auth');
 
@@ -191,7 +183,7 @@ Route::get('/api/app/status', function (Request $request) {
     $shop = $session->getShop();
 
     $appInfo = \App\Models\AppInfo::where('shop', $shop)->first();
-    
+
     return response()->json($appInfo);
 })->middleware('shopify.auth');
 

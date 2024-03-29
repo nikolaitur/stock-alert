@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "d4bee5b260bedd5216f17c987c8a4189"
-name = "stock-alert"
-handle = "stock-alert-14"
-application_url = "https://investigate-pray-manufacturer-curve.trycloudflare.com"
+client_id = "5b472b119e2c0bab4004ca596ef64b7b"
+name = "stock-alert-new"
+handle = "stock-alert-new"
+application_url = "https://transcription-titanium-postage-trust.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_customers,write_customers,write_products"
 
 [auth]
 redirect_urls = [
-  "https://investigate-pray-manufacturer-curve.trycloudflare.com/auth/callback",
-  "https://investigate-pray-manufacturer-curve.trycloudflare.com/auth/shopify/callback",
-  "https://investigate-pray-manufacturer-curve.trycloudflare.com/api/auth/callback"
+  "https://transcription-titanium-postage-trust.trycloudflare.com/auth/callback",
+  "https://transcription-titanium-postage-trust.trycloudflare.com/auth/shopify/callback",
+  "https://transcription-titanium-postage-trust.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
