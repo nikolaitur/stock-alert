@@ -16,6 +16,9 @@ use Shopify\Clients\HttpHeaders;
 use Shopify\Clients\Rest;
 use Shopify\Context;
 use Shopify\Exception\InvalidWebhookException;
+use Shopify\Rest\Admin2024_01\Metafield;
+use Shopify\Rest\Admin2024_01\Product;
+use Shopify\Rest\Admin2024_01\Variant;
 use Shopify\Utils;
 use Shopify\Webhooks\Registry;
 use Shopify\Webhooks\Topics;
@@ -48,7 +51,7 @@ Route::fallback(function (Request $request) {
 
 Route::get('/api/auth', function (Request $request) {
     $shop = Utils::sanitizeShopDomain($request->query('shop'));
-
+    Log::info($shop);
     // Delete any previously created OAuth sessions that were not completed (don't have an access token)
     Session::where('shop', $shop)->where('access_token', null)->delete();
 
@@ -75,6 +78,16 @@ Route::get('/api/auth/callback', function (Request $request) {
         );
     }
 
+    $response = Registry::register('/api/webhooks', Topics::PRODUCTS_UPDATE, $shop, $session->getAccessToken());
+    if ($response->isSuccess()) {
+        Log::debug("Registered PRODUCTS_UPDATE webhook for shop $shop");
+    } else {
+        Log::error(
+            "Failed to register PRODUCTS_UPDATE webhook for shop $shop with response body: " .
+            print_r($response->getBody(), true)
+        );
+    }
+
     $redirectUrl = Utils::getEmbeddedAppUrl($host);
     if (Config::get('shopify.billing.required')) {
         list ($hasPayment, $confirmationUrl) = EnsureBilling::check($session, Config::get('shopify.billing'));
@@ -87,48 +100,40 @@ Route::get('/api/auth/callback', function (Request $request) {
     return redirect($redirectUrl);
 });
 
-Route::get('/api/products/count', function (Request $request) {
+Route::get('/api/alerts', function (Request $request) {
     /** @var AuthSession */
     $session = $request->get('shopifySession'); // Provided by the shopify.auth middleware, guaranteed to be active
+    // first get all alerts records
+    $alerts = \App\Models\StockAlert::where('send_status', false)
+        ->selectRaw('*, count(customer_id) as subscriptions')
+        ->groupBy(['product_id', 'variant_id'])
+        ->get();
+    $products = \App\Models\StockAlert::where('send_status', false)
+        ->groupBy('product_id')
+        ->get();
 
-    $client = new Rest($session->getShop(), $session->getAccessToken());
-    $result = $client->get('products/count');
+    $productMetafields = array ();
+    foreach ($products as $product) {
+        $metafields = Metafield::all($session, [], ["metafield" => ["owner_id" => $product->product_id, "owner_resource" => "product"]]);
+        foreach ($metafields as $metafield) {
+            if ($metafield->key == "stock_alert_settings") {
+                $productMetafields[$product->product_id] = $metafield->value;
+            }
+        }
+    }
 
-    return response($result->getDecodedBody());
+    // $response = [];
+    foreach ($alerts as &$alert) {
+        $product = Product::find($session, $alert->product_id, []);
+        $variant = Variant::find($session, $alert->variant_id, []);
+        $alert->product_title = $product->title;
+        $alert->variant_title = $variant->title;
+        $alert->stockLevel = $productMetafields[$alert->product_id] ?? 0;
+    }
+    return response()->json($alerts);
+
 })->middleware('shopify.auth');
 
-// Route::post('/api/customer', function (Request $request) {
-//     dd($request);
-//     $session = $request->get('shopifySession'); // Provided by the shopify.auth middleware, guaranteed to be active
-//     $success = $code = $error = null;
-//     $variantId = $request->get('variant_id');
-//     $productId = $request->get('product_id');
-//     $email = $request->get('email');
-//     return response()->json(["success" => true]);
-//     try {
-//         CustomerCreator::call($session, $email, $variantId, $productId);
-//         $success = true;
-//         $code = 200;
-//         $error = null;
-//     } catch (\Exception $e) {
-//         $success = false;
-
-//         if ($e instanceof ShopifyProductCreatorException) {
-//             $code = $e->response->getStatusCode();
-//             $error = $e->response->getDecodedBody();
-//             if (array_key_exists("errors", $error)) {
-//                 $error = $error["errors"];
-//             }
-//         } else {
-//             $code = 500;
-//             $error = $e->getMessage();
-//         }
-
-//         Log::error("Failed to create customer: $error");
-//     } finally {
-//         return response()->json(["success" => $success, "error" => $error], $code);
-//     }
-// })->middleware('shopify.auth');
 
 Route::get('/api/products/create', function (Request $request) {
     /** @var AuthSession */

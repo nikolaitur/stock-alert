@@ -7,6 +7,7 @@ use App\Lib\Handlers\AppUninstalled;
 use App\Lib\Handlers\Privacy\CustomersDataRequest;
 use App\Lib\Handlers\Privacy\CustomersRedact;
 use App\Lib\Handlers\Privacy\ShopRedact;
+use App\Lib\Handlers\Privacy\ShopProductsUpdateData;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Shopify\Context;
@@ -70,5 +71,6 @@ class AppServiceProvider extends ServiceProvider
         Registry::addHandler('CUSTOMERS_DATA_REQUEST', new CustomersDataRequest());
         Registry::addHandler('CUSTOMERS_REDACT', new CustomersRedact());
         Registry::addHandler('SHOP_REDACT', new ShopRedact());
+        Registry::addHandler(Topics::PRODUCTS_UPDATE, new ShopProductsUpdateData());
     }
 }

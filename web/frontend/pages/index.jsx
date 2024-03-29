@@ -18,16 +18,54 @@ import { useTranslation, Trans } from "react-i18next";
 import { trophyImage } from "../assets";
 
 import { ProductsCard } from "../components";
+import { useAuthenticatedFetch, useAppQuery } from "../hooks";
+import { useEffect, useMemo } from "react";
 
 export default function HomePage() {
   const { t } = useTranslation();
-  let rows = [];
+  // let rows = [];
+  const fetch = useAuthenticatedFetch();
+
+  const {
+    data,
+    refetch: refetchProductCount,
+    isLoading: isLoading,
+    isRefetching: isRefetchingCount,
+  } = useAppQuery({
+    url: "/api/alerts",
+    reactQueryOptions: {
+      onSuccess: () => {
+        // setIsLoading(false);
+      },
+    },
+  });
+  
+  // get subscriptions example
+  useEffect(() => {
+    (async() => {
+      const response = await fetch("/api/subscriptions/7"); // /api/subscriptions/:product_id
+
+    })()
+  }, [])
+
   const dataTableHeadings = ['   ', 'Product', 'Variant', 'Stock level', 'Subscriptions'];
   const columnDataTypes = ['text', 'text', 'numeric', 'numeric'];
-  for (let i = 0; i < 10; i++) {
-    let random = Math.round(Math.random() * 10000);
-    rows.push([ `Product title ${i}`, `Variant title ${i}`, i.toString(), <Link url=" ">{random}</Link>]);
-  }
+  // for (let i = 0; i < 10; i++) {
+  //   let random = Math.round(Math.random() * 10000);
+  //   rows.push([`Product title ${i}`, `Variant title ${i}`, i.toString(), <Link url=" ">{random}</Link>]);
+  // }
+  const rows = useMemo(() => {
+    if (!isLoading) {
+      return data.map((item) => ([
+        item.product_title,
+        item.variant_title,
+        item.stockLevel,
+        <Link url={"/subscription/" + item.id}>{item.subscriptions}</Link>
+      ]))
+    }
+    return []
+  }, [data, isLoading])
+
   return (
     <Page narrowWidth>
       <Layout.Section>

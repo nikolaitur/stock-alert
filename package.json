@@ -5,7 +5,7 @@
   "scripts": {
     "shopify": "shopify",
     "build": "shopify app build",
-    "dev": "shopify app dev --graphiql-port 3458",
+    "dev": "shopify app dev --graphiql-port 3459",
     "push": "shopify app push",
     "generate": "shopify app generate",
     "deploy": "shopify app deploy",

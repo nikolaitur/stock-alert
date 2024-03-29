@@ -1,0 +1,27 @@
+[[extensions]]
+name = "stock-alert-trigger"
+type = "flow_trigger"
+handle = "stock-alert-trigger"
+description = "Your description"
+
+[settings]
+
+  #[[settings.fields]]
+  #type = "customer_reference"
+
+  #[[settings.fields]]
+  #type = "product_reference"
+
+  [[settings.fields]]
+  type = "single_line_text_field"
+  key = "variantTitle"
+
+  [[settings.fields]]
+  type = "single_line_text_field"
+  key = "email"
+  
+
+  [[settings.fields]]
+  type = "single_line_text_field"
+  key = "productTitle"
+
