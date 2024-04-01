@@ -19,6 +19,7 @@ use Shopify\Exception\InvalidWebhookException;
 use Shopify\Rest\Admin2024_01\Metafield;
 use Shopify\Rest\Admin2024_01\Product;
 use Shopify\Rest\Admin2024_01\Variant;
+use Shopify\Rest\Admin2024_01\Theme;
 use Shopify\Utils;
 use Shopify\Webhooks\Registry;
 use Shopify\Webhooks\Topics;
@@ -167,7 +168,25 @@ Route::get('/api/app/enable', function (Request $request) {
         $appInfo->is_enable = true;
         $appInfo->save();
     } else {
-        $appInfo->is_enable = !$appInfo->is_enable;
+        $appInfo->is_enable = true;
+        $appInfo->save();
+    }
+
+    return response()->json(['msg' => 'ok']);
+})->middleware('shopify.auth');
+
+Route::get('/api/app/disable', function (Request $request) {
+    $session = $request->get('shopifySession');
+    $shop = $session->getShop();
+
+    $appInfo = \App\Models\AppInfo::where('shop', $shop)->first();
+    if (!isset ($appInfo)) {
+        $appInfo = new \App\Models\AppInfo();
+        $appInfo->shop = $shop;
+        $appInfo->is_enable = false;
+        $appInfo->save();
+    } else {
+        $appInfo->is_enable = false;
         $appInfo->save();
     }
 
@@ -178,7 +197,10 @@ Route::get('/api/app/status', function (Request $request) {
     $session = $request->get('shopifySession');
     $shop = $session->getShop();
 
+    $themes = Theme::all($session);
+
     $appInfo = \App\Models\AppInfo::where('shop', $shop)->first();
+    $appInfo->themes = $themes;
 
     return response()->json($appInfo);
 })->middleware('shopify.auth');

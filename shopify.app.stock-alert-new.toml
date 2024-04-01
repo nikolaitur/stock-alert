@@ -3,7 +3,7 @@
 client_id = "5b472b119e2c0bab4004ca596ef64b7b"
 name = "stock-alert-new"
 handle = "stock-alert-new"
-application_url = "https://essence-joined-vast-entitled.trycloudflare.com"
+application_url = "https://treo-prayers-soviet-med.trycloudflare.com"
 embedded = true
 
 [build]
@@ -13,13 +13,13 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_customers,write_customers,write_products"
+scopes = "read_customers,read_themes,write_customers,write_products"
 
 [auth]
 redirect_urls = [
-  "https://essence-joined-vast-entitled.trycloudflare.com/auth/callback",
-  "https://essence-joined-vast-entitled.trycloudflare.com/auth/shopify/callback",
-  "https://essence-joined-vast-entitled.trycloudflare.com/api/auth/callback"
+  "https://treo-prayers-soviet-med.trycloudflare.com/auth/callback",
+  "https://treo-prayers-soviet-med.trycloudflare.com/auth/shopify/callback",
+  "https://treo-prayers-soviet-med.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -43,9 +43,7 @@ export default function SubscriptionDetail() {
           console.log(result);
           setProductInfo(result?.alert);
           setSubscribers(result?.customers);
-        //   await fetch('/api/app/enable');
-    
-        //   const res = await fetch('/api/app/status');
+        
         })()
       }, [id])
     

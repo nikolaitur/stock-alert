@@ -1,14 +1,17 @@
 {
   "HomePage": {
     "heading": "Stock Alerts",
-    "disable_alert": "Disabling Stock Alert will disbble the option for user to opt-in to stock-alerts.",
+    "disable_alert": "Disabling Stock Alert will disable the option for user to opt-in to stock-alerts.",
+    "enable_alert": "Enabling Stock Alert will enable the option for user to opt-in to stock-alerts.",
     "add_to_theme_editor": "Add to Shopify theme editor",
     "app_is_enabled": "The app is currently enabled, so you can add it to your Shopify theme editor.",
     "add_to_theme": "Add to theme",
     "recent_subscriptions": "Recent subscriptions",
     "show_all": "Show All",
     "enable": "Enable",
-    "disable": "Disable"
+    "disable": "Disable",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
   },
   "NavigationMenu": {
     "subscriptions": "Subscriptions"
