@@ -12,20 +12,22 @@ import {
     Box,
 } from "@shopify/polaris";
 import { Link } from "react-router-dom";
+import { useTranslation, Trans } from "react-i18next";
 import React, { useState, useCallback,useEffect } from "react";
 import { trophyImage } from "../assets";
 
 export function SubscriptionTable({ selectable, filterBar, rows }) {
+    const { t } = useTranslation();
     const subscriptionTableRows = rows;
     const { selectedResources, allResourcesSelected, handleSelectionChange } =
         useIndexResourceState(subscriptionTableRows);
     const subscriptionTableHeadings = [
         { title: "" },
-        { title: "Product" },
-        { title: "Variant" },
-        { title: "Stock level" },
+        { title: t("SubscriptionTable.product") },
+        { title: t("SubscriptionTable.variant") },
+        { title: t("SubscriptionDetail.stock_level") },
         { title: "    " },
-        { title: "Subscriptions" },
+        { title: t("Subscriptions.subscriptions") },
     ];
     console.log(rows);
     const rowMarkup = subscriptionTableRows.map(

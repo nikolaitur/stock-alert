@@ -46,7 +46,7 @@ export default function SubscriptionsPage() {
         <Page narrowWidth>
             <Layout.Section>
               <BlockStack gap={400}>
-                <Text variant="headingLg">Subscriptions</Text>
+                <Text variant="headingLg">{ t("Subscriptions.subscriptions") }</Text>
                 <SubscriptionTable
                       rows={rows}
                       selectable={false}

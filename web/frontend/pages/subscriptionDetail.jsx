@@ -13,9 +13,18 @@ import {
 } from "@shopify/polaris";
 import React, { useState, useEffect } from "react";
 import { useAuthenticatedFetch, useAppQuery } from "../hooks";
+import { useTranslation, Trans } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { trophyImage } from "../assets";
+
+const getFormatedDate = (d) => {
+    return d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+
+}
+
 export default function SubscriptionDetail() {
+    const { t } = useTranslation();
     const { id } = useParams();
     const fetch = useAuthenticatedFetch();
     const [sortState, setSortState] = useState(2); //0 no sortable data,1 dec sort,2 asc
@@ -59,7 +68,7 @@ export default function SubscriptionDetail() {
             >
                 <IndexTable.Cell as="th">{email}</IndexTable.Cell>
                 <IndexTable.Cell as="th">
-                    <Text alignment="end">{created_at}</Text>
+                    <Text alignment="end">{created_at ? getFormatedDate(new Date(created_at)): null}</Text>
                 </IndexTable.Cell>
             </IndexTable.Row>
         )
@@ -68,7 +77,7 @@ export default function SubscriptionDetail() {
         <Page narrowWidth>
             <Layout.Section>
                 <BlockStack gap={400}>
-                    <Text variant="headingLg">Product Subscriptions</Text>
+                    <Text variant="headingLg">{ t("SubscriptionDetail.product_subscriptions") }</Text>
                     <Card>
                         <InlineStack align="space-between" blockAlign="center">
                             <InlineStack gap={400}>
@@ -102,7 +111,7 @@ export default function SubscriptionDetail() {
                                 </BlockStack>
                             </InlineStack>
                             <BlockStack>
-                                <Text variant="headingSm">Stock Level</Text>
+                                <Text variant="headingSm">{ t("SubscriptionDetail.stock_level") }</Text>
                                 <Text alignment="end">{ productInfo.stockLevel }</Text>
                             </BlockStack>
                         </InlineStack>

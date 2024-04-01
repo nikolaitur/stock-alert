@@ -52,47 +52,45 @@ export default function HomePage() {
             <BlockStack gap={600}>
                 <BlockStack gap={400}>
                     <Text as="h1" variant="headingLg">
-                        Stock Alerts
+                        { t("HomePage.heading") }
                     </Text>
                     <Card sectioned>
                         <BlockStack gap={100}>
                             <InlineStack align="space-between">
                                 <InlineStack gap={400} blockAlign="center">
                                     <Text as="h2" variant="headingMd">
-                                        Stock Alerts
+                                        { t("HomePage.heading") }
                                     </Text>
                                     <Badge tone="success" size="medium">
                                         <Text variant="headingXs">
-                                            Enable
+                                            { t("HomePage.enable") }
                                         </Text>
                                     </Badge>
                                 </InlineStack>
                                 <Button size="medium">
-                                    <Text variant="headingXs">Disable</Text>
+                                    <Text variant="headingXs">{ t("HomePage.disable") }</Text>
                                 </Button>
                             </InlineStack>
                             <Text color="subdued">
-                                Disabling Stock Alert will disbble the
-                                option for user to opt-in to stock-alerts.
+                                { t("HomePage.disable_alert") }
                             </Text>
                         </BlockStack>
                     </Card>
                     <Card sectioned>
                         <BlockStack gap={150}>
                             <Text variant="headingMd" as="h2">
-                                Add to Shopify theme editor
+                                { t("HomePage.add_to_theme_editor") }
                             </Text>
                             <BlockStack gap={100}>
                                 <Text color="subdued">
-                                    The app is currently enabled, so you can
-                                    add it to your Shopify theme editor.
+                                    { t("HomePage.app_is_enabled") }
                                 </Text>
                                 <InlineStack>
                                     <Button
                                         variant="primary"
                                         fullWidth={false}
                                     >
-                                        Add to theme
+                                        { t("HomePage.add_to_theme") }
                                     </Button>
                                 </InlineStack>
                             </BlockStack>
@@ -102,12 +100,12 @@ export default function HomePage() {
                 <BlockStack gap={400}>
                     <InlineStack align="space-between">
                         <Text variant="headingLg">
-                            Recent subscriptions
+                            { t("HomePage.recent_subscriptions") }
                         </Text>
                         <Link url="/subscriptions">
                           <Button>
                             <Box minWidth="64px" maxWidth="64px">
-                              <Text variant="headingXs">Show all</Text>
+                              <Text variant="headingXs">{ t("HomePage.show_all") }</Text>
                             </Box>
                           </Button>
                         </Link>
