@@ -13,6 +13,7 @@ import {
 import SubscriptionDetail from "./pages/subscriptionDetail";
 import HomePage from "./pages";
 import Subscriptions from './pages/subscriptions';
+import Email from "./pages/Email";
 
 export default function App() {
   // Any .tsx or .jsx files in /pages will become a route
@@ -32,12 +33,17 @@ export default function App() {
                   label: "Subscriptions",
                   destination: "/subscriptions",
                 },
+                {
+                  label: "Email",
+                  destination: "/email"
+                }
               ]}
             />
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/subscriptionDetail/:id" element={<SubscriptionDetail />} />
+              <Route path="/email" element={<Email />} />
             </Routes>
           </QueryProvider>
         </AppBridgeProvider>

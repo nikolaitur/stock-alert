@@ -1,0 +1,10 @@
+{
+  "stock_alert": {
+    "title": "Notify me!",
+    "notify_content": "We will send you an email when this article is back in stock",
+    "notify_result_content": "Thank you, you will be notified when this item is back in stock.",
+    "notify_button_text": "Notify me",
+    "notify_result_button_text": "Continue shopping",
+    "notify_email_address": "Email address"
+  }
+}

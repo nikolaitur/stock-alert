@@ -1,0 +1,136 @@
+.stock-alert {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 13;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(3px);
+
+  transition-property: all;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-delay: 0s;
+}
+.product-notify-me {
+  width: 379px;
+  height: 305px;
+  padding: 39px 44px 44px;
+  display: none;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  box-shadow: 15px 15px 30px 0 #00000005;
+}
+.product-notify-me > h1:first-child {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24.36px;
+  text-align: left;
+  margin-bottom: 16px;
+}
+.product-notify-me > p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  margin-bottom: 14px;
+  color: #6B7280;
+  letter-spacing: 0.4px;
+}
+.notify-email-input-title {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 21.6px;
+  text-align: left;
+  margin: 0;
+  height: 22px;
+}
+.notify-email-input-title > span {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-align: left;
+  color: #FF4B55;
+}
+.btn-notify-me {
+  background: #48CFAD;
+  border-radius: 4px;
+  box-shadow: -1px 4px 10px 0 #00000014;
+  width: 100%;
+  margin-top: 10px;
+}
+.notify-btn-close {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 6px;
+  right: 6px;
+  gap: 0;
+  cursor: pointer;
+}
+
+
+.notify-me-result {
+  width: 379px;
+  height: 237px;
+  border-radius: 6px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 39px 44px 48px;
+  display: none;
+}
+.notify-me-result-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24.36px;
+  text-align: left;
+  color: black;
+  margin-bottom: 20px;
+}
+.notify-me-result-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-bottom: 17px;
+}
+.notify-me-result-content > i {
+  width: 19px;
+  height: 19px;
+}
+.notify-me-result-content > p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  margin: 0;
+  color: #6B7280;
+  letter-spacing: 0.4px;
+}
+.notify-me-result-button {
+  border: 1px solid #48CFAD;
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  color: #48CFAD;
+}
+.notify-me-result-button:hover {
+  color: #48CFAD !important;
+}
+
+.error-message {
+  border-color: red;
+}
+.hidden_element {
+  visibility: hidden;
+}
+  

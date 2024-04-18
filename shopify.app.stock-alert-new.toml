@@ -3,7 +3,7 @@
 client_id = "5b472b119e2c0bab4004ca596ef64b7b"
 name = "stock-alert-new"
 handle = "stock-alert-new"
-application_url = "https://treo-prayers-soviet-med.trycloudflare.com"
+application_url = "https://economy-headquarters-ha-vc.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_customers,read_themes,write_customers,write_products"
 
 [auth]
 redirect_urls = [
-  "https://treo-prayers-soviet-med.trycloudflare.com/auth/callback",
-  "https://treo-prayers-soviet-med.trycloudflare.com/auth/shopify/callback",
-  "https://treo-prayers-soviet-med.trycloudflare.com/api/auth/callback"
+  "https://economy-headquarters-ha-vc.trycloudflare.com/auth/callback",
+  "https://economy-headquarters-ha-vc.trycloudflare.com/auth/shopify/callback",
+  "https://economy-headquarters-ha-vc.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -1,0 +1,69 @@
+<div>
+  <div data-stock-criteria="{{ product.metafields.custom.stock_alert_settings }}" class="stock-alert">
+    <div class="product-notify-me">
+        <h1>{{'stock_alert.title' | t}}</h1>
+        <p>{{ 'stock_alert.notify_content' | t }}</p>
+        <div class="notify-email-input">
+            <h3 class="notify-email-input-title">{{ 'stock_alert.notify_email_address' | t }}<span>*</span></h3>
+            <input type="email" class="my-email" placeholder="{{ 'stock_alert.notify_email_address' | t }}" required />
+        </div>
+        <button class="btn-notify-me">{{ 'stock_alert.notify_button_text' | t }}</button>
+        <i class="notify-btn-close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 13L13 1M1 1L13 13" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </i>
+    </div>
+    <div class="notify-me-result">
+        <h1 class="notify-me-result-title">{{ 'stock_alert.title' | t }}</h1>
+        <div class="notify-me-result-content">
+            <i>
+                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="9.5" cy="9.5" r="9.5" fill="#48CFAD"/>
+                    <path d="M14.4603 6.65447C14.1537 6.33774 13.6425 6.32379 13.3187 6.62493L8.16332 11.4147L5.70435 8.94135C5.39292 8.62832 4.88229 8.62146 4.56249 8.9266C4.24296 9.23144 4.23623 9.73222 4.54739 10.0452L7.56223 13.0776C7.72022 13.2367 7.9302 13.3168 8.14071 13.3168C8.34045 13.3168 8.54019 13.2445 8.69659 13.0998L14.4302 7.77289C14.7537 7.47225 14.7674 6.97147 14.4603 6.65447Z" fill="white"/>
+                </svg>
+            </i>
+            <p>{{ 'stock_alert.notify_result_content' | t }}</p>
+        </div>
+        <button class="notify-me-result-button">{{ 'stock_alert.notify_result_button_text' | t }}</button>
+        <i class="notify-btn-close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 13L13 1M1 1L13 13" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </i>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Stock Alert",
+  "target": "body",
+  "stylesheet": "stock-alert.css",
+  "javascript": "stock-alert.js",
+  "settings": [
+    {
+        "type": "checkbox",
+        "id": "enable_backorder",
+        "label": "Enable stock alert for backorders"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_variant_selection",
+        "label": "Enable Variant Selection"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_privacy_disclaimer",
+        "label": "Enable Privacy Disclaimer"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_newsletter",
+        "label": "Enable Newsletter Opt-in"
+    }
+
+  ]
+}
+{% endschema %}
+

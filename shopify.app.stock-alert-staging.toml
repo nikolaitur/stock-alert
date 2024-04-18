@@ -1,0 +1,34 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "0e2333dab45241a5291060864386592a"
+name = "Stock Alert Staging"
+handle = "stock-alert-staging"
+application_url = "https://piece-mart-wisdom-permalink.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "stock-alert-test1.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_customers,read_themes,write_customers,write_products"
+
+[auth]
+redirect_urls = [
+  "https://piece-mart-wisdom-permalink.trycloudflare.com/auth/callback",
+  "https://piece-mart-wisdom-permalink.trycloudflare.com/auth/shopify/callback",
+  "https://piece-mart-wisdom-permalink.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+[app_proxy]
+url = "https://piece-mart-wisdom-permalink.trycloudflare.com"
+subpath = "stock-alert-staging"
+prefix = "apps"
+
+[pos]
+embedded = false

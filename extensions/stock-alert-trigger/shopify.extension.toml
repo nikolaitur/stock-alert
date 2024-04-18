@@ -6,11 +6,11 @@ description = "Your description"
 
 [settings]
 
-  #[[settings.fields]]
-  #type = "customer_reference"
+  [[settings.fields]]
+  type = "customer_reference"
 
-  #[[settings.fields]]
-  #type = "product_reference"
+  [[settings.fields]]
+  type = "product_reference"
 
   [[settings.fields]]
   type = "single_line_text_field"
