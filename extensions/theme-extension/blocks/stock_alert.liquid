@@ -8,6 +8,23 @@
             <input type="email" class="my-email" placeholder="{{ 'stock_alert.notify_email_address' | t }}" required />
         </div>
         <button class="btn-notify-me">{{ 'stock_alert.notify_button_text' | t }}</button>
+        {% if block.settings.enable_newsletter %}
+            <div class="sign-up-newsletter">
+                <input
+                    type="checkbox"
+                    name=""
+                    id="select-privacy-policy-checkbox"
+                    class="hidden-checkbox">
+                <span class="checkbox"></span>
+                <label for="select-privacy-policy-checkbox" class="checkbox-label stock-alert-text">Yes, Sign up for our newsletter</label>
+            </div>
+        {% endif %}
+        {% if block.settings.enable_privacy_disclaimer %}
+            <label class="alert-about-privacy-policy stock-alert-text">
+                By opting in to notifications you consent with our
+                <a href="/policies/privacy-policy" class="privacy-policy-link" target='blank'>privacy policy</a>
+            </label>
+        {% endif %}
         <i class="notify-btn-close">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 13L13 1M1 1L13 13" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

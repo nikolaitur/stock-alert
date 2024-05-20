@@ -1,6 +1,6 @@
 (function(){
 
-
+    
     const originalReplace = history.replaceState;
     const stockAlert = document.querySelector('.stock-alert');
     const buyItNuowButton = document.querySelector('.overlay-quaternary');
